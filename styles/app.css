@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --white: #ffffff;
+  --cyan: #2bd0d0;
+  --grey: #9e9aa8;
+  --light-gray: #eff1f7;
+  --dark-violet: #4b3f6b;
+  --very-dark-violet: #3a3054;
+  --very-dark-blue: #34313d;
+}
+
+.font-15, .navbar-right button, .navbar-left-links li {
+  font-size: max(15px, 0.875rem);
+}
+
+.font-18 {
+  font-size: max(18px, 1.125rem);
+}
+
+.font-20 {
+  font-size: max(20px, 1.175rem);
+}
+
+.font-22 {
+  font-size: max(22px, 1.285rem);
+}
+
+.font-40 {
+  font-size: max(40px, 1.875rem);
+}
+
+.font-80 {
+  font-size: max(80px, 4.375rem);
+}
+
+.navbar-right button.sign-up {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-right, .navbar-left-links, .navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  font-family: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+li {
+  list-style-type: none;
+}
+
+.navbar {
+  padding: 2rem 8rem 0;
+}
+.navbar-left {
+  gap: 2rem;
+}
+.navbar-left-links {
+  gap: 1.5rem;
+}
+.navbar-left-links li {
+  font-weight: 700;
+}
+.navbar-left-links li a {
+  color: var(--grey);
+  transition: color 0.3s ease;
+}
+.navbar-left-links li:hover a {
+  color: var(--very-dark-blue);
+}
+.navbar-right {
+  gap: 1.5rem;
+}
+.navbar-right button.login {
+  color: var(--grey);
+}
+.navbar-right button.sign-up {
+  color: var(--white);
+  background: var(--cyan);
+  height: 2.5rem;
+  width: 6.5rem;
+  border-radius: 1.25rem;
+}
+.navbar-right button.sign-up:hover {
+  background: #9ae3e3;
+}/*# sourceMappingURL=app.css.map */

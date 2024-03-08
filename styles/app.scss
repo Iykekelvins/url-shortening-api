@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import './colors.scss';
+@import './fonts.scss';
+@import './utils.scss';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	font-style: normal;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+a {
+	text-decoration: none;
+	font-family: inherit;
+}
+
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
+	font-weight: 700;
+	font-family: inherit;
+	transition: all 0.3s ease;
+}
+
+li {
+	list-style-type: none;
+}
+
+.navbar {
+	@extend %jcsb;
+	padding: 2rem 8rem 0;
+
+	&-left {
+		@extend %aic;
+		gap: 2rem;
+
+		&-links {
+			@extend %aic;
+			gap: 1.5rem;
+			li {
+				@extend .font-15;
+				font-weight: 700;
+				a {
+					color: var(--grey);
+					transition: color 0.3s ease;
+				}
+				&:hover {
+					a {
+						color: var(--very-dark-blue);
+					}
+				}
+			}
+		}
+	}
+
+	&-right {
+		@extend %aic;
+		gap: 1.5rem;
+		button {
+			@extend .font-15;
+			&.login {
+				color: var(--grey);
+			}
+
+			&.sign-up {
+				@extend %center;
+				color: var(--white);
+				background: var(--cyan);
+				height: 2.5rem;
+				width: 6.5rem;
+				border-radius: 1.25rem;
+				&:hover {
+					background: #9ae3e3;
+				}
+			}
+		}
+	}
+}
