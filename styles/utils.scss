@@ -1,16 +1,25 @@
-%center {
+.center {
 	align-items: center;
 	display: flex;
 	justify-content: center;
 }
 
-%aic {
+.aic {
 	display: flex;
 	align-items: center;
 }
 
-%jcsb {
+.jcsb {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.cyan-btn {
+	@extend .center;
+	color: var(--white);
+	background: var(--cyan);
+	&:hover {
+		background: #9ae3e3;
+	}
 }
