@@ -26,7 +26,7 @@
   font-size: max(22px, 1.285rem);
 }
 
-.font-40, .stats header h2 {
+.font-40, .boost div h2, .stats header h2 {
   font-size: max(40px, 1.875rem);
 }
 
@@ -34,13 +34,13 @@
   font-size: max(80px, 4.375rem);
 }
 
-.center, .stats-info li div, .stats header, .cyan-btn, .link-container form button, .hero-left button, .navbar-right button.sign-up {
+.center, .boost, .stats-info li div, .stats header, .cyan-btn, .boost div button, .link-container form button, .hero-left button, .navbar-right button.sign-up {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.aic, .link-container form, .navbar-right, .navbar-left-links, .navbar-left {
+.aic, .boost div, .link-container form, .navbar-right, .navbar-left-links, .navbar-left {
   display: flex;
   align-items: center;
 }
@@ -51,11 +51,11 @@
   justify-content: space-between;
 }
 
-.cyan-btn, .link-container form button, .hero-left button, .navbar-right button.sign-up {
+.cyan-btn, .boost div button, .link-container form button, .hero-left button, .navbar-right button.sign-up {
   color: var(--white);
   background: var(--cyan);
 }
-.cyan-btn:hover, .link-container form button:hover, .hero-left button:hover, .navbar-right button.sign-up:hover {
+.cyan-btn:hover, .boost div button:hover, .link-container form button:hover, .hero-left button:hover, .navbar-right button.sign-up:hover {
   background: #9ae3e3;
 }
 
@@ -101,10 +101,12 @@ li {
 
 .navbar {
   padding: 2rem var(--gutter) 0;
-  overflow: auto;
 }
 .navbar-left {
-  gap: 2rem;
+  gap: 3rem;
+}
+.navbar-left > a {
+  height: 32px;
 }
 .navbar-left-links {
   gap: 1.5rem;
@@ -124,6 +126,9 @@ li {
 }
 .navbar-right button.login {
   color: var(--grey);
+}
+.navbar-right button.login:hover {
+  color: var(--very-dark-blue);
 }
 .navbar-right button.sign-up {
   height: 2.5rem;
@@ -164,7 +169,7 @@ li {
 }
 
 .link-container {
-  margin: 0 8rem;
+  margin: 0 var(--gutter);
   background: var(--very-dark-violet);
   padding: 2.5rem;
   border-radius: 8px;
@@ -273,4 +278,27 @@ li {
 }
 .stats-info li:last-child {
   top: 6rem;
+}
+
+.boost {
+  background: var(--very-dark-violet);
+  height: 15.625rem;
+  background-image: url(../images/bg-boost-desktop.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.boost div {
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.boost div h2 {
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.boost div button {
+  height: 3.5rem;
+  width: 12rem;
+  border-radius: 2.5rem;
 }/*# sourceMappingURL=app.css.map */

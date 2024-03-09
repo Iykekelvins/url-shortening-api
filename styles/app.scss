@@ -46,11 +46,13 @@ li {
 .navbar {
 	@extend .jcsb;
 	padding: 2rem var(--gutter) 0;
-	overflow: auto;
 
 	&-left {
 		@extend .aic;
-		gap: 2rem;
+		gap: 3rem;
+		& > a {
+			height: 32px;
+		}
 
 		&-links {
 			@extend .aic;
@@ -78,6 +80,9 @@ li {
 			@extend .font-15;
 			&.login {
 				color: var(--grey);
+				&:hover {
+					color: var(--very-dark-blue);
+				}
 			}
 
 			&.sign-up {
@@ -130,7 +135,7 @@ li {
 }
 
 .link-container {
-	margin: 0 8rem;
+	margin: 0 var(--gutter);
 	background: var(--very-dark-violet);
 	padding: 2.5rem;
 	border-radius: 8px;
@@ -248,6 +253,33 @@ li {
 			&:last-child {
 				top: 6rem;
 			}
+		}
+	}
+}
+
+.boost {
+	@extend .center;
+	background: var(--very-dark-violet);
+	height: 15.625rem;
+	background-image: url(../images/bg-boost-desktop.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	div {
+		@extend .aic;
+		flex-direction: column;
+		gap: 1.5rem;
+		h2 {
+			@extend .font-40;
+			font-weight: 700;
+			color: var(--white);
+			letter-spacing: -1px;
+		}
+		button {
+			@extend .cyan-btn;
+			height: 3.5rem;
+			width: 12rem;
+			border-radius: 2.5rem;
 		}
 	}
 }
