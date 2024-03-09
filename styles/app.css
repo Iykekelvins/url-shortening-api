@@ -301,4 +301,9 @@ li {
   height: 3.5rem;
   width: 12rem;
   border-radius: 2.5rem;
+}
+
+.footer {
+  padding: 3.5rem var(--gutter);
+  background: #232127;
 }/*# sourceMappingURL=app.css.map */

@@ -18,6 +18,18 @@ const statsInfoArr = [
 	},
 ]
 
+const footerLinksArr = [
+	{
+		arr: ['Features', 'Link Shortening', 'Branded Links', 'Analytics'],
+	},
+	{
+		arr: ['Resources', 'Blog', 'Developers', 'Support'],
+	},
+	{
+		arr: ['Company', 'About', 'Our Team', 'Careers', 'Contact'],
+	},
+]
+
 statsInfoArr.forEach((info) => {
 	const itemEl = document.createElement('li')
 	const iconContainerEl = document.createElement('div')
