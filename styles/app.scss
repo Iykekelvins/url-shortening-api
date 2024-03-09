@@ -11,6 +11,7 @@
 
 html {
 	font-size: calc(100vw / 1440 * 16);
+	scroll-behavior: smooth;
 }
 
 body {
@@ -277,6 +278,7 @@ li {
 		}
 		button {
 			@extend .cyan-btn;
+			@extend .font-20;
 			height: 3.5rem;
 			width: 12rem;
 			border-radius: 2.5rem;
@@ -285,6 +287,82 @@ li {
 }
 
 .footer {
-	padding: 3.5rem var(--gutter);
+	padding: 3.5rem var(--gutter) 0;
 	background: #232127;
+
+	&-main {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 4rem;
+
+		&-right {
+			display: flex;
+			align-items: flex-start;
+			gap: 5rem;
+		}
+
+		&-links {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 5rem;
+			ul {
+				li {
+					@extend .font-15;
+					font-weight: 500;
+					width: max-content;
+					&:first-child {
+						padding-bottom: 01rem;
+						color: var(--white);
+					}
+					&:not(:first-child) {
+						padding-top: 0.5rem;
+					}
+					a {
+						color: #bfbfbf;
+						transition: color 0.3s ease;
+						letter-spacing: -0.23px;
+					}
+					&:hover {
+						a {
+							color: var(--cyan);
+						}
+					}
+				}
+			}
+		}
+
+		&-socials {
+			@extend .aic;
+			gap: 0.875rem;
+			a {
+				svg {
+					path {
+						transition: all 0.3s ease;
+					}
+				}
+				&:hover {
+					svg {
+						path {
+							fill: var(--cyan);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.attribution {
+		@extend .font-18;
+		color: var(--white);
+		text-align: center;
+
+		a {
+			color: #bfbfbf;
+			transition: color 0.3s ease;
+			letter-spacing: -0.23px;
+			&:hover {
+				color: var(--cyan);
+			}
+		}
+	}
 }

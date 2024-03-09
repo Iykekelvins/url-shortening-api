@@ -1,4 +1,5 @@
-const statsInfoUl = document.querySelector('.stats-info')
+const statsInfoEl = document.querySelector('.stats-info')
+const footerLinksEl = document.querySelector('.footer-main-links')
 
 const statsInfoArr = [
 	{
@@ -19,15 +20,11 @@ const statsInfoArr = [
 ]
 
 const footerLinksArr = [
-	{
-		arr: ['Features', 'Link Shortening', 'Branded Links', 'Analytics'],
-	},
-	{
-		arr: ['Resources', 'Blog', 'Developers', 'Support'],
-	},
-	{
-		arr: ['Company', 'About', 'Our Team', 'Careers', 'Contact'],
-	},
+	['Features', 'Link Shortening', 'Branded Links', 'Analytics'],
+	,
+	['Resources', 'Blog', 'Developers', 'Support'],
+	,
+	['Company', 'About', 'Our Team', 'Careers', 'Contact'],
 ]
 
 statsInfoArr.forEach((info) => {
@@ -45,5 +42,27 @@ statsInfoArr.forEach((info) => {
 
 	itemEl.append(...[iconContainerEl, titleEl, infoEl])
 
-	statsInfoUl.appendChild(itemEl)
+	statsInfoEl.appendChild(itemEl)
+})
+
+footerLinksArr.forEach((links) => {
+	const parentLinksUl = document.createElement('ul')
+
+	const titleLi = document.createElement('li')
+	titleLi.innerHTML = links[0]
+
+	parentLinksUl.appendChild(titleLi)
+
+	links.slice(1).forEach((link) => {
+		const childLinkLi = document.createElement('li')
+		const childLink = document.createElement('a')
+
+		childLink.innerHTML = link
+		childLink.href = '#'
+		childLinkLi.appendChild(childLink)
+
+		parentLinksUl.appendChild(childLinkLi)
+	})
+
+	footerLinksEl.appendChild(parentLinksUl)
 })
