@@ -46,7 +46,7 @@ li {
 
 .navbar {
 	@extend .jcsb;
-	padding: 2rem var(--gutter) 0;
+	padding: max(2rem, 32px) var(--gutter) 0;
 
 	&-left {
 		@extend .aic;
@@ -88,17 +88,23 @@ li {
 
 			&.sign-up {
 				@extend .cyan-btn;
-				height: 2.5rem;
-				width: 6.5rem;
-				border-radius: 1.25rem;
+				height: max(2.5rem, 38px);
+				width: max(6.5rem, 98px);
+				border-radius: max(20px, 1.25rem);
 			}
+		}
+	}
+	@media screen and (max-width: 600px) {
+		&-left-links,
+		&-right {
+			display: none;
 		}
 	}
 }
 
 .hero {
 	@extend .jcsb;
-	padding: 3rem 0 3.5rem var(--gutter);
+	padding: max(3rem, 48px) 0 max(3.5rem, 56px) var(--gutter);
 	overflow: hidden;
 	&-left {
 		h1 {
@@ -114,23 +120,39 @@ li {
 		p {
 			@extend .font-22;
 			color: var(--grey);
-			max-width: max(540px, 33rem);
+			max-width: max(33.75rem, 327px);
 			line-height: 1.5;
 			letter-spacing: 0.12px;
+			padding-top: max(1rem, 18px);
 		}
 		button {
 			@extend .cyan-btn;
 			@extend .font-20;
-			width: 12.3rem;
-			height: 3.5rem;
-			border-radius: 2.5rem;
-			margin-top: 2rem;
+			width: max(12.3rem, 190px);
+			height: max(3.5rem, 55px);
+			border-radius: max(40px, 2rem);
+			margin-top: max(2rem, 24px);
 		}
 	}
 	&-right {
-		margin-right: -8.5rem;
 		img {
-			height: 30.125rem;
+			height: max(30.125rem, 320px);
+		}
+	}
+	@media screen and (max-width: 900px) {
+		flex-direction: column-reverse;
+		gap: 40px;
+		padding-left: 0;
+		&-left {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+	}
+	@media screen and (max-width: 600px) {
+		&-right {
+			margin-right: -24rem;
 		}
 	}
 }
@@ -139,7 +161,7 @@ li {
 	margin: 0 var(--gutter);
 	background: var(--very-dark-violet);
 	padding: 2.5rem;
-	border-radius: 8px;
+	border-radius: max(8px, 0.5rem);
 	background-image: url(../images/bg-shorten-desktop.svg);
 	background-repeat: no-repeat;
 	background-position: right;
@@ -147,16 +169,16 @@ li {
 	position: relative;
 	form {
 		@extend .aic;
-		gap: 1.5rem;
+		gap: max(1.5rem, 20px);
 		input {
 			@extend .font-20;
 			color: var(--very-dark-blue);
 			outline: none;
-			height: 4rem;
+			height: max(4rem, 60px);
 			letter-spacing: 0.15px;
-			padding-left: 1rem;
+			padding-left: max(1rem, 16px);
 			border: none;
-			border-radius: 4px;
+			border-radius: max(4px, 0.25rem);
 			font-family: inherit;
 			width: 100%;
 		}
@@ -164,17 +186,25 @@ li {
 			@extend .cyan-btn;
 			@extend .font-20;
 			font-weight: 700;
-			width: 11.75rem;
-			height: 4rem;
-			border-radius: 4px;
+			width: max(11.75rem, 180px);
+			height: max(4rem, 60px);
+			border-radius: max(4px, 0.25rem);
+		}
+	}
+	@media screen and (max-width: 600px) {
+		form {
+			flex-direction: column;
+			button {
+				width: 100%;
+			}
 		}
 	}
 }
 
 .stats {
 	background: var(--light-grey);
-	padding: 10rem var(--gutter) 10.5rem;
-	margin-top: -4.25rem;
+	padding: max(10rem, 155px) var(--gutter) max(15rem, 90px);
+	margin-top: -70px;
 	header {
 		@extend .center;
 		flex-direction: column;
@@ -191,7 +221,7 @@ li {
 			font-weight: 500;
 			line-height: 1.5;
 			letter-spacing: 0.12px;
-			max-width: 33.75rem;
+			max-width: max(33.75rem, 520px);
 			padding-top: 0.5rem;
 		}
 	}
@@ -200,35 +230,37 @@ li {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5rem;
-		margin-top: 4.5rem;
+		margin-top: max(4.5rem, 85px);
 		li {
 			background: var(--white);
 			border-radius: 8px;
-			padding: 0rem 1.5rem 1.5rem;
+			padding: 0rem max(1.5rem, 24px) max(1.5rem, 24px);
 			position: relative;
 			div {
 				@extend .center;
-				height: 5.5rem;
-				width: 5.5rem;
+				height: max(5.5rem, 88px);
+				width: max(5.5rem, 88px);
 				border-radius: 50%;
 				background: var(--very-dark-violet);
 				position: relative;
-				top: -2.5rem;
+				top: min(-2.5rem, -40px);
+				z-index: 2;
 				img {
-					height: 2.5rem;
+					height: max(2.5rem, 40px);
 				}
 			}
 			h4 {
 				@extend .font-22;
 				font-weight: 700;
-				margin-top: -0.5rem;
+				margin-top: min(-0.5rem, -12px);
+				line-height: 1.1;
 				color: var(--very-dark-blue);
 			}
 			p {
 				@extend .font-15;
 				color: var(--grey);
-				max-width: 17.875rem;
-				padding-top: 0.875rem;
+				max-width: max(17.875rem, 280px);
+				padding-top: max(0.875rem, 14px);
 			}
 			&:nth-child(2) {
 				top: 3rem;
@@ -255,13 +287,44 @@ li {
 				top: 6rem;
 			}
 		}
+		@media screen and (max-width: 600px) {
+			grid-template-columns: 1fr;
+			gap: 80px;
+			li {
+				text-align: center;
+				div {
+					left: 50%;
+					transform: translate(-50%, 0);
+				}
+				p {
+					max-width: unset;
+				}
+				&:nth-child(2) {
+					&::before {
+						width: 2rem;
+						top: -92px;
+						left: 50%;
+						transform: translate(-50%, 0);
+						height: 80px;
+					}
+					&::after {
+						width: 2rem;
+						top: unset;
+						bottom: -80px;
+						left: 50%;
+						transform: translate(-50%, 0);
+						height: 80px;
+					}
+				}
+			}
+		}
 	}
 }
 
 .boost {
 	@extend .center;
 	background: var(--very-dark-violet);
-	height: 15.625rem;
+	height: max(15.625rem, 300px);
 	background-image: url(../images/bg-boost-desktop.svg);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -269,42 +332,44 @@ li {
 	div {
 		@extend .aic;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: max(1.5rem, 20px);
 		h2 {
 			@extend .font-40;
 			font-weight: 700;
 			color: var(--white);
 			letter-spacing: -1px;
+			text-align: center;
 		}
 		button {
 			@extend .cyan-btn;
 			@extend .font-20;
-			height: 3.5rem;
-			width: 12rem;
-			border-radius: 2.5rem;
+			height: max(3.5rem, 50px);
+			width: max(12rem, 185px);
+			border-radius: max(2.5rem, 40px);
 		}
 	}
 }
 
 .footer {
-	padding: 3.5rem var(--gutter) 0;
+	padding: max(3.5rem, 56px) var(--gutter) max(2.5rem, 40px);
 	background: #232127;
 
 	&-main {
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 4rem;
+		gap: max(5rem, 15px);
+		margin-bottom: max(4rem, 64px);
 
 		&-right {
 			display: flex;
 			align-items: flex-start;
-			gap: 5rem;
+			gap: max(5rem, 15px);
 		}
 
 		&-links {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			gap: 5rem;
+			gap: max(5rem, 15px);
 			ul {
 				li {
 					@extend .font-15;
@@ -333,7 +398,7 @@ li {
 
 		&-socials {
 			@extend .aic;
-			gap: 0.875rem;
+			gap: max(0.875rem, 14px);
 			a {
 				svg {
 					path {
@@ -346,6 +411,27 @@ li {
 							fill: var(--cyan);
 						}
 					}
+				}
+			}
+		}
+
+		@media screen and (max-width: 900px) {
+			&-links {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+		@media screen and (max-width: 600px) {
+			flex-direction: column;
+			align-items: center;
+			&-right {
+				flex-direction: column;
+				align-items: center;
+			}
+			&-links {
+				grid-template-columns: 1fr;
+				ul > li {
+					width: 100%;
+					text-align: center;
 				}
 			}
 		}

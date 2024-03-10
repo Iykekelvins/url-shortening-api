@@ -6,5 +6,5 @@
   --dark-violet: #4b3f6b;
   --very-dark-violet: #3a3054;
   --very-dark-blue: #34313d;
-  --gutter: 7rem;
+  --gutter: max(7rem, 40px);
 }/*# sourceMappingURL=variables.css.map */
