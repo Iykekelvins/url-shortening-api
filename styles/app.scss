@@ -159,15 +159,15 @@ li {
 
 .link-container {
 	margin: 0 var(--gutter);
-	background: var(--very-dark-violet);
-	padding: 2.5rem;
-	border-radius: max(8px, 0.5rem);
-	background-image: url(../images/bg-shorten-desktop.svg);
-	background-repeat: no-repeat;
-	background-position: right;
-	background-size: cover;
 	position: relative;
 	form {
+		background: var(--very-dark-violet);
+		padding: max(2.5rem, 24px);
+		border-radius: max(8px, 0.5rem);
+		background-image: url(../images/bg-shorten-desktop.svg);
+		background-repeat: no-repeat;
+		background-position: right;
+		background-size: cover;
 		@extend .aic;
 		gap: max(1.5rem, 20px);
 		input {
@@ -191,6 +191,65 @@ li {
 			border-radius: max(4px, 0.25rem);
 		}
 	}
+
+	&-links {
+		margin-top: max(1rem, 16px);
+		display: grid;
+		gap: max(1rem, 16px);
+		li {
+			@extend .jcsb;
+			flex-wrap: wrap;
+			gap: max(1rem, 16px);
+			background: var(--white);
+			border-radius: max(8px, 0.5rem);
+			padding: max(1rem, 16px);
+			h4,
+			a {
+				@extend .font-20;
+				color: var(--very-dark-blue);
+				font-weight: 500;
+				letter-spacing: 0.15px;
+			}
+			.copy {
+				@extend .aic;
+				gap: max(1rem, 16px);
+				a {
+					color: var(--cyan);
+				}
+				button {
+					@extend .font-15;
+					@extend .cyan-btn;
+					border-radius: max(4px, 0.25rem);
+					font-weight: 700;
+					height: max(40px, 2.5rem);
+					width: max(103px, 6.3rem);
+				}
+			}
+		}
+	}
+	@media screen and (max-width: 680px) {
+		&-links li {
+			& > h4 {
+				padding-left: 16px;
+			}
+			padding-left: 0;
+			padding-right: 0;
+			.line {
+				height: 0.5px;
+				width: 100%;
+				background: var(--grey);
+			}
+			.copy {
+				align-items: flex-start;
+				flex-direction: column;
+				padding: 0 16px;
+				width: 100%;
+				button {
+					width: 100%;
+				}
+			}
+		}
+	}
 	@media screen and (max-width: 600px) {
 		form {
 			flex-direction: column;
@@ -203,12 +262,13 @@ li {
 
 .stats {
 	background: var(--light-grey);
-	padding: max(10rem, 155px) var(--gutter) max(15rem, 90px);
-	margin-top: -70px;
+	padding: max(5rem, 80px) var(--gutter) max(15rem, 90px);
+	margin-top: min(-75px, -4.6rem);
 	header {
 		@extend .center;
 		flex-direction: column;
 		text-align: center;
+		margin-top: max(4rem, 64px);
 		h2 {
 			@extend .font-40;
 			font-weight: 700;
