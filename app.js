@@ -2,6 +2,8 @@ const statsInfoEl = document.querySelector('.stats-info')
 const footerLinksEl = document.querySelector('.footer-main-links')
 const linksContainerEl = document.querySelector('.link-container-links')
 
+// links saved locally
+
 const statsInfoArr = [
 	{
 		icon: '/images/icon-brand-recognition.svg',
@@ -31,7 +33,34 @@ const footerLinksArr = [
 // create link
 let linkInputVal = document.getElementById('link-input')
 
-const createLink = (shortLink) => {
+const addLinkToLocalStorage = (link, shortLink) => {
+	// check if locally saved links exists
+	const shortLinks = JSON.parse(localStorage.getItem('short-links'))
+
+	if (!shortLinks) {
+		localStorage.setItem(
+			'short-links',
+			JSON.stringify([
+				{
+					link,
+					shortLink,
+					id: !shortLinks ? 0 : shortLinks.length + 1,
+				},
+			])
+		)
+
+		return
+	}
+	shortLinks.push({
+		link,
+		shortLink,
+		id: shortLinks.length + 1,
+	})
+
+	localStorage.setItem('short-links', JSON.stringify(shortLinks))
+}
+
+const createLink = (link, shortLink) => {
 	const linkEl = document.createElement('li')
 	const linkTitle = document.createElement('h4')
 	const linkDivider = document.createElement('div')
@@ -42,7 +71,7 @@ const createLink = (shortLink) => {
 	linkDivider.classList.add('line')
 	linkCopyDivEl.classList.add('copy')
 
-	linkTitle.innerHTML = linkInputVal.value
+	linkTitle.innerHTML = link
 	linkHrefEl.innerHTML = shortLink
 	linkHrefEl.href = shortLink
 	linkHrefEl.target = '_blank'
@@ -69,21 +98,24 @@ const createLink = (shortLink) => {
 
 	linkCopyBtn.addEventListener('click', handleCopyLink)
 
-	gsap.fromTo(
-		linkEl,
-		{
-			y: -50,
-			opacity: 0,
-		},
-		{
-			y: 0,
-			ease: 'power3.out',
-			duration: 0.5,
-			opacity: 1,
-		}
-	)
+	if (linkInputVal.value) {
+		gsap.fromTo(
+			linkEl,
+			{
+				y: -25,
+				opacity: 0,
+			},
+			{
+				y: 0,
+				ease: 'power3.out',
+				duration: 0.5,
+				opacity: 1,
+			}
+		)
+	}
 }
 
+// API for shortening input link
 const fetchShortLink = async () => {
 	try {
 		// const response = await fetch('https://cleanuri.com/api/v1/shorten', {
@@ -98,7 +130,8 @@ const fetchShortLink = async () => {
 
 		// if(response.ok)
 
-		createLink('https://rel.ink/k4lKyk')
+		createLink(linkInputVal.value, 'https://rel.ink/k4lKyk')
+		addLinkToLocalStorage(linkInputVal.value, 'https://rel.ink/k4lKyk')
 	} catch (error) {
 		console.log(error)
 	}
@@ -127,42 +160,53 @@ const handleLinkSubmit = (e) => {
 
 linkForm.addEventListener('submit', handleLinkSubmit)
 
-statsInfoArr.forEach((info) => {
-	const itemEl = document.createElement('li')
-	const iconContainerEl = document.createElement('div')
-	const iconEl = document.createElement('img')
-	const titleEl = document.createElement('h4')
-	const infoEl = document.createElement('p')
+window.onload = () => {
+	const shortLinks = JSON.parse(localStorage.getItem('short-links'))
 
-	iconEl.src = info.icon
-	titleEl.innerHTML = info.title
-	infoEl.innerHTML = info.info
+	if (shortLinks) {
+		shortLinks.forEach((_shortLink) => {
+			const { link, shortLink, id } = _shortLink
 
-	iconContainerEl.appendChild(iconEl)
+			createLink(link, shortLink)
+		})
+	}
+	statsInfoArr.forEach((info) => {
+		const itemEl = document.createElement('li')
+		const iconContainerEl = document.createElement('div')
+		const iconEl = document.createElement('img')
+		const titleEl = document.createElement('h4')
+		const infoEl = document.createElement('p')
 
-	itemEl.append(...[iconContainerEl, titleEl, infoEl])
+		iconEl.src = info.icon
+		titleEl.innerHTML = info.title
+		infoEl.innerHTML = info.info
 
-	statsInfoEl.appendChild(itemEl)
-})
+		iconContainerEl.appendChild(iconEl)
 
-footerLinksArr.forEach((links) => {
-	const parentLinksUl = document.createElement('ul')
+		itemEl.append(...[iconContainerEl, titleEl, infoEl])
 
-	const titleLi = document.createElement('li')
-	titleLi.innerHTML = links[0]
-
-	parentLinksUl.appendChild(titleLi)
-
-	links.slice(1).forEach((link) => {
-		const childLinkLi = document.createElement('li')
-		const childLink = document.createElement('a')
-
-		childLink.innerHTML = link
-		childLink.href = '#'
-		childLinkLi.appendChild(childLink)
-
-		parentLinksUl.appendChild(childLinkLi)
+		statsInfoEl.appendChild(itemEl)
 	})
 
-	footerLinksEl.appendChild(parentLinksUl)
-})
+	footerLinksArr.forEach((links) => {
+		const parentLinksUl = document.createElement('ul')
+
+		const titleLi = document.createElement('li')
+		titleLi.innerHTML = links[0]
+
+		parentLinksUl.appendChild(titleLi)
+
+		links.slice(1).forEach((link) => {
+			const childLinkLi = document.createElement('li')
+			const childLink = document.createElement('a')
+
+			childLink.innerHTML = link
+			childLink.href = '#'
+			childLinkLi.appendChild(childLink)
+
+			parentLinksUl.appendChild(childLinkLi)
+		})
+
+		footerLinksEl.appendChild(parentLinksUl)
+	})
+}
