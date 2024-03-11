@@ -91,6 +91,7 @@ a {
 button {
   border: none;
   background: none;
+  outline: none;
   cursor: pointer;
   font-weight: 700;
   font-family: inherit;
@@ -203,6 +204,7 @@ li {
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
+  position: relative;
   gap: max(1.5rem, 20px);
 }
 .link-container form input {
@@ -211,16 +213,37 @@ li {
   height: max(4rem, 60px);
   letter-spacing: 0.15px;
   padding-left: max(1rem, 16px);
-  border: none;
+  border: 1px solid transparent;
   border-radius: max(4px, 0.25rem);
   font-family: inherit;
+  transition: all 0.3s ease;
   width: 100%;
+}
+.link-container form input.error {
+  border-color: #f46363;
+  border-width: 3px;
+}
+.link-container form input.error::-moz-placeholder {
+  color: #f46363;
+}
+.link-container form input.error::placeholder {
+  color: #f46363;
 }
 .link-container form button {
   font-weight: 700;
   width: max(11.75rem, 180px);
   height: max(4rem, 60px);
   border-radius: max(4px, 0.25rem);
+}
+.link-container form p {
+  font-size: max(1rem, 14px);
+  font-style: italic;
+  font-weight: 500;
+  color: #f46363;
+  position: absolute;
+  bottom: max(0.75rem, 12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 .link-container-links {
   margin-top: max(1rem, 16px);
@@ -245,6 +268,10 @@ li {
 }
 .link-container-links li .copy a {
   color: var(--cyan);
+  transition: color 0.3s ease;
+}
+.link-container-links li .copy a:hover {
+  color: #3a3054;
 }
 .link-container-links li .copy button {
   border-radius: max(4px, 0.25rem);
@@ -278,6 +305,11 @@ li {
 @media screen and (max-width: 600px) {
   .link-container form {
     flex-direction: column;
+  }
+  .link-container form p {
+    top: 86px;
+    left: 24px;
+    bottom: unset;
   }
   .link-container form button {
     width: 100%;

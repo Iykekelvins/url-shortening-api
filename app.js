@@ -1,5 +1,6 @@
 const statsInfoEl = document.querySelector('.stats-info')
 const footerLinksEl = document.querySelector('.footer-main-links')
+const linksContainerEl = document.querySelector('.link-container-links')
 
 const statsInfoArr = [
 	{
@@ -26,6 +27,105 @@ const footerLinksArr = [
 	,
 	['Company', 'About', 'Our Team', 'Careers', 'Contact'],
 ]
+
+// create link
+let linkInputVal = document.getElementById('link-input')
+
+const createLink = (shortLink) => {
+	const linkEl = document.createElement('li')
+	const linkTitle = document.createElement('h4')
+	const linkDivider = document.createElement('div')
+	const linkCopyDivEl = document.createElement('div')
+	const linkHrefEl = document.createElement('a')
+	const linkCopyBtn = document.createElement('button')
+
+	linkDivider.classList.add('line')
+	linkCopyDivEl.classList.add('copy')
+
+	linkTitle.innerHTML = linkInputVal.value
+	linkHrefEl.innerHTML = shortLink
+	linkHrefEl.href = shortLink
+	linkHrefEl.target = '_blank'
+	linkCopyBtn.innerHTML = 'Copy'
+
+	linkCopyDivEl.append(...[linkHrefEl, linkCopyBtn])
+
+	linkEl.append(...[linkTitle, linkDivider, linkCopyDivEl])
+
+	linksContainerEl.appendChild(linkEl)
+
+	const handleCopyLink = () => {
+		if (linkCopyBtn.innerHTML === 'Copy') {
+			navigator.clipboard.writeText(shortLink)
+			linkCopyBtn.innerHTML = 'Copied!'
+			linkCopyBtn.style.backgroundColor = '#3A3054'
+		}
+
+		setTimeout(() => {
+			linkCopyBtn.innerHTML = 'Copy'
+			linkCopyBtn.style.backgroundColor = ''
+		}, 1000)
+	}
+
+	linkCopyBtn.addEventListener('click', handleCopyLink)
+
+	gsap.fromTo(
+		linkEl,
+		{
+			y: -50,
+			opacity: 0,
+		},
+		{
+			y: 0,
+			ease: 'power3.out',
+			duration: 0.5,
+			opacity: 1,
+		}
+	)
+}
+
+const fetchShortLink = async () => {
+	try {
+		// const response = await fetch('https://cleanuri.com/api/v1/shorten', {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// 	body: JSON.stringify({
+		// 		url: linkInputVal.value,
+		// 	}),
+		// })
+
+		// if(response.ok)
+
+		createLink('https://rel.ink/k4lKyk')
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+const linkForm = document.querySelector('#link-form')
+
+const handleLinkSubmit = (e) => {
+	e.preventDefault()
+
+	const errorMsg = linkForm.querySelector('p')
+
+	if (linkInputVal.value === '') {
+		linkInputVal.classList.add('error')
+		errorMsg.style.opacity = 1
+		linkForm.style.gap = '40px'
+		return
+	}
+
+	fetchShortLink()
+	linkInputVal.value = ''
+	linkInputVal.classList.remove('error')
+	errorMsg.style.opacity = 0
+	linkForm.style.gap = ''
+}
+
+linkForm.addEventListener('submit', handleLinkSubmit)
 
 statsInfoArr.forEach((info) => {
 	const itemEl = document.createElement('li')

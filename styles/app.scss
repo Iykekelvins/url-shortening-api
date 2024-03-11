@@ -34,6 +34,7 @@ a {
 button {
 	border: none;
 	background: none;
+	outline: none;
 	cursor: pointer;
 	font-weight: 700;
 	font-family: inherit;
@@ -168,6 +169,7 @@ li {
 		background-repeat: no-repeat;
 		background-position: right;
 		background-size: cover;
+		position: relative;
 		@extend .aic;
 		gap: max(1.5rem, 20px);
 		input {
@@ -177,10 +179,18 @@ li {
 			height: max(4rem, 60px);
 			letter-spacing: 0.15px;
 			padding-left: max(1rem, 16px);
-			border: none;
+			border: 1px solid transparent;
 			border-radius: max(4px, 0.25rem);
 			font-family: inherit;
+			transition: all 0.3s ease;
 			width: 100%;
+			&.error {
+				border-color: #f46363;
+				border-width: 3px;
+				&::placeholder {
+					color: #f46363;
+				}
+			}
 		}
 		button {
 			@extend .cyan-btn;
@@ -189,6 +199,16 @@ li {
 			width: max(11.75rem, 180px);
 			height: max(4rem, 60px);
 			border-radius: max(4px, 0.25rem);
+		}
+		p {
+			font-size: max(1rem, 14px);
+			font-style: italic;
+			font-weight: 500;
+			color: #f46363;
+			position: absolute;
+			bottom: max(0.75rem, 12px);
+			opacity: 0;
+			transition: opacity 0.3s ease;
 		}
 	}
 
@@ -215,6 +235,10 @@ li {
 				gap: max(1rem, 16px);
 				a {
 					color: var(--cyan);
+					transition: color 0.3s ease;
+					&:hover {
+						color: #3a3054;
+					}
 				}
 				button {
 					@extend .font-15;
@@ -253,6 +277,11 @@ li {
 	@media screen and (max-width: 600px) {
 		form {
 			flex-direction: column;
+			p {
+				top: 86px;
+				left: 24px;
+				bottom: unset;
+			}
 			button {
 				width: 100%;
 			}
