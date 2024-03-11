@@ -147,6 +147,7 @@ li {
   flex-direction: column;
   gap: 36px;
   position: fixed;
+  z-index: 4;
   width: 87%;
   top: 18rem;
   background: #3a3054;
@@ -166,7 +167,11 @@ li {
   opacity: 0;
 }
 .navbar-mobile ul li a {
+  transition: color 0.3s ease;
   color: var(--white);
+}
+.navbar-mobile ul li a:hover {
+  color: var(--cyan);
 }
 .navbar-mobile .line {
   width: 100%;
@@ -188,7 +193,7 @@ li {
   opacity: 0;
 }
 .navbar-mobile footer button.login:hover {
-  color: var(--very-dark-blue);
+  color: var(--cyan);
 }
 .navbar-mobile footer button.sign-up {
   height: 48px;
@@ -197,6 +202,7 @@ li {
 }
 .navbar-mobile-toggle {
   display: none;
+  margin-top: -2rem;
 }
 .navbar-mobile-toggle span {
   width: 24px;

@@ -105,6 +105,7 @@ li {
 		flex-direction: column;
 		gap: 36px;
 		position: fixed;
+		z-index: 4;
 		width: 87%;
 		top: 18rem;
 		background: #3a3054;
@@ -121,7 +122,11 @@ li {
 				transform: translateY(15px);
 				opacity: 0;
 				a {
+					transition: color 0.3s ease;
 					color: var(--white);
+					&:hover {
+						color: var(--cyan);
+					}
 				}
 			}
 		}
@@ -137,13 +142,12 @@ li {
 			width: 100%;
 			button {
 				font-size: 18px;
-				// transform: translateY(15px);
 				opacity: 0;
 				&.login {
 					color: var(--white);
 					opacity: 0;
 					&:hover {
-						color: var(--very-dark-blue);
+						color: var(--cyan);
 					}
 				}
 
@@ -157,6 +161,7 @@ li {
 		}
 		&-toggle {
 			display: none;
+			margin-top: -2rem;
 			span {
 				width: 24px;
 				height: 3px;

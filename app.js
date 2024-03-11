@@ -159,38 +159,79 @@ const handleLinkSubmit = (e) => {
 
 linkForm.addEventListener('submit', handleLinkSubmit)
 
-toggleBtn.addEventListener('click', () => {
-	const tl = gsap.timeline({ paused: true })
+let isOpen
 
-	let isOpen = false
+const tl = gsap.timeline({ paused: true })
 
+const toggleMobileMenu = () => {
 	const mobileMenu = document.querySelector('.navbar-mobile')
 	const links = mobileMenu.querySelectorAll('li')
 	const btns = mobileMenu.querySelectorAll('button')
 
-	tl.to(mobileMenu, {
-		scale: 1,
-		duration: 0.5,
-		ease: 'power4.inOut',
-	}).to([links, btns], {
-		y: 0,
-		opacity: 1,
-		stagger: 0.1,
-		// duration: 0.1,
+	const line1 = toggleBtn.querySelector('.line-1')
+	const line2 = toggleBtn.querySelector('.line-2')
+	const line3 = toggleBtn.querySelector('.line-3')
+
+	tl.to(line1, {
+		display: 'none',
+		duration: 0.2,
 		ease: 'power3',
-		delay: -0.15,
 	})
+		.to(line2, {
+			rotate: '45deg',
+			duration: 0.2,
+			ease: 'power3',
+		})
+		.to(
+			line3,
+			{
+				rotate: '-45deg',
+				marginTop: '-7px',
+				duration: 0.2,
+				ease: 'power3',
+			},
+			'-=0.25'
+		)
+		.to(
+			mobileMenu,
+			{
+				scale: 1,
+				duration: 0.5,
+				ease: 'power4.inOut',
+			},
+			'-=0.25'
+		)
+		.to([links, btns], {
+			y: 0,
+			opacity: 1,
+			stagger: 0.1,
+			ease: 'power3',
+			delay: -0.15,
+		})
+
 	if (!isOpen) {
-		isOpen = true
 		tl.play()
+		isOpen = true
 	} else {
-		isOpen = false
 		tl.reverse()
+		isOpen = undefined
 	}
-})
+}
+
+toggleBtn.addEventListener('click', toggleMobileMenu)
 
 window.onload = () => {
 	const shortLinks = JSON.parse(localStorage.getItem('short-links'))
+	const mobileMenuLinks = document.querySelectorAll('.navbar-mobile li')
+	const mobileMenuBtns = document.querySelectorAll('.navbar-mobile button')
+
+	mobileMenuLinks.forEach((link) => {
+		link.addEventListener('click', toggleMobileMenu)
+	})
+
+	mobileMenuBtns.forEach((link) => {
+		link.addEventListener('click', toggleMobileMenu)
+	})
 
 	if (shortLinks) {
 		shortLinks.forEach((_shortLink) => {
