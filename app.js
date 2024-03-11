@@ -159,6 +159,36 @@ const handleLinkSubmit = (e) => {
 
 linkForm.addEventListener('submit', handleLinkSubmit)
 
+toggleBtn.addEventListener('click', () => {
+	const tl = gsap.timeline({ paused: true })
+
+	let isOpen = false
+
+	const mobileMenu = document.querySelector('.navbar-mobile')
+	const links = mobileMenu.querySelectorAll('li')
+	const btns = mobileMenu.querySelectorAll('button')
+
+	tl.to(mobileMenu, {
+		scale: 1,
+		duration: 0.5,
+		ease: 'power4.inOut',
+	}).to([links, btns], {
+		y: 0,
+		opacity: 1,
+		stagger: 0.1,
+		// duration: 0.1,
+		ease: 'power3',
+		delay: -0.15,
+	})
+	if (!isOpen) {
+		isOpen = true
+		tl.play()
+	} else {
+		isOpen = false
+		tl.reverse()
+	}
+})
+
 window.onload = () => {
 	const shortLinks = JSON.parse(localStorage.getItem('short-links'))
 

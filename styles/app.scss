@@ -118,6 +118,8 @@ li {
 			gap: 24px;
 			li {
 				font-size: 18px;
+				transform: translateY(15px);
+				opacity: 0;
 				a {
 					color: var(--white);
 				}
@@ -135,8 +137,11 @@ li {
 			width: 100%;
 			button {
 				font-size: 18px;
+				// transform: translateY(15px);
+				opacity: 0;
 				&.login {
 					color: var(--white);
+					opacity: 0;
 					&:hover {
 						color: var(--very-dark-blue);
 					}

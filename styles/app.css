@@ -162,6 +162,8 @@ li {
 }
 .navbar-mobile ul li {
   font-size: 18px;
+  transform: translateY(15px);
+  opacity: 0;
 }
 .navbar-mobile ul li a {
   color: var(--white);
@@ -179,9 +181,11 @@ li {
 }
 .navbar-mobile footer button {
   font-size: 18px;
+  opacity: 0;
 }
 .navbar-mobile footer button.login {
   color: var(--white);
+  opacity: 0;
 }
 .navbar-mobile footer button.login:hover {
   color: var(--very-dark-blue);
