@@ -1,8 +1,7 @@
 const statsInfoEl = document.querySelector('.stats-info')
 const footerLinksEl = document.querySelector('.footer-main-links')
 const linksContainerEl = document.querySelector('.link-container-links')
-
-// links saved locally
+const toggleBtn = document.querySelector('.navbar-mobile-toggle')
 
 const statsInfoArr = [
 	{
