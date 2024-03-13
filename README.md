@@ -28,7 +28,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://cleanuri.com/Zr2NOj](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G/hub)
-- Live Site URL: [https://cleanuri.com/54eBOG](https://cleanuri.com/54eBOG)](https://url-shortening-api-iykekelvins.vercel.app/)
+- Live Site URL: [https://cleanuri.com/54eBOG](https://url-shortening-api-iykekelvins.vercel.app/)
 
 ### Built with
 
