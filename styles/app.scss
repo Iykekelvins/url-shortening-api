@@ -303,9 +303,7 @@ li {
 	}
 
 	&-links {
-		margin-top: max(1rem, 16px);
 		display: grid;
-		gap: max(1rem, 16px);
 		li {
 			@extend .jcsb;
 			flex-wrap: wrap;
@@ -313,6 +311,9 @@ li {
 			background: var(--white);
 			border-radius: max(8px, 0.5rem);
 			padding: max(1rem, 16px);
+			overflow: hidden;
+			margin-top: max(1rem, 16px);
+
 			h4,
 			a {
 				@extend .font-20;
@@ -330,13 +331,19 @@ li {
 						color: #3a3054;
 					}
 				}
-				button {
-					@extend .font-15;
-					@extend .cyan-btn;
-					border-radius: max(4px, 0.25rem);
-					font-weight: 700;
-					height: max(40px, 2.5rem);
-					width: max(103px, 6.3rem);
+				&-right {
+					@extend .aic;
+					gap: max(1rem, 16px);
+					button {
+						&.copy-btn {
+							@extend .font-15;
+							@extend .cyan-btn;
+							border-radius: max(4px, 0.25rem);
+							font-weight: 700;
+							height: max(40px, 2.5rem);
+							width: max(103px, 6.3rem);
+						}
+					}
 				}
 			}
 		}
@@ -358,8 +365,13 @@ li {
 				flex-direction: column;
 				padding: 0 16px;
 				width: 100%;
-				button {
+				&-right {
 					width: 100%;
+					button {
+						&.copy-btn {
+							width: 100%;
+						}
+					}
 				}
 			}
 		}
@@ -629,5 +641,22 @@ li {
 				color: var(--cyan);
 			}
 		}
+	}
+}
+
+.spinner {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: absolute;
+	opacity: 0;
+	background: conic-gradient(#0000 10%, #ffffff);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+	animation: spinner-zp9dbg 1s infinite linear;
+}
+
+@keyframes spinner-zp9dbg {
+	to {
+		transform: rotate(1turn);
 	}
 }

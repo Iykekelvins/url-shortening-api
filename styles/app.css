@@ -10,7 +10,7 @@
   --gutter: max(7rem, 18px);
 }
 
-.font-15, .footer-main-links ul li, .stats-info li p, .link-container-links li .copy button, .navbar-right button, .navbar-left-links li {
+.font-15, .footer-main-links ul li, .stats-info li p, .link-container-links li .copy-right button.copy-btn, .navbar-right button, .navbar-left-links li {
   font-size: max(15px, 0.938rem);
 }
 
@@ -35,13 +35,13 @@
   font-size: max(42px, 5.5rem);
 }
 
-.center, .boost, .stats-info li div, .stats header, .cyan-btn, .boost div button, .link-container-links li .copy button, .link-container form button, .hero-left button, .navbar-mobile footer button.sign-up, .navbar-right button.sign-up {
+.center, .boost, .stats-info li div, .stats header, .cyan-btn, .boost div button, .link-container-links li .copy-right button.copy-btn, .link-container form button, .hero-left button, .navbar-mobile footer button.sign-up, .navbar-right button.sign-up {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.aic, .footer-main-socials, .boost div, .link-container-links li .copy, .link-container form, .navbar-right, .navbar-left-links, .navbar-left {
+.aic, .footer-main-socials, .boost div, .link-container-links li .copy-right, .link-container-links li .copy, .link-container form, .navbar-right, .navbar-left-links, .navbar-left {
   display: flex;
   align-items: center;
 }
@@ -52,11 +52,11 @@
   justify-content: space-between;
 }
 
-.cyan-btn, .boost div button, .link-container-links li .copy button, .link-container form button, .hero-left button, .navbar-mobile footer button.sign-up, .navbar-right button.sign-up {
+.cyan-btn, .boost div button, .link-container-links li .copy-right button.copy-btn, .link-container form button, .hero-left button, .navbar-mobile footer button.sign-up, .navbar-right button.sign-up {
   color: var(--white);
   background: var(--cyan);
 }
-.cyan-btn:hover, .boost div button:hover, .link-container-links li .copy button:hover, .link-container form button:hover, .hero-left button:hover, .navbar-mobile footer button.sign-up:hover, .navbar-right button.sign-up:hover {
+.cyan-btn:hover, .boost div button:hover, .link-container-links li .copy-right button.copy-btn:hover, .link-container form button:hover, .hero-left button:hover, .navbar-mobile footer button.sign-up:hover, .navbar-right button.sign-up:hover {
   background: #9ae3e3;
 }
 
@@ -328,9 +328,7 @@ li {
   transition: opacity 0.3s ease;
 }
 .link-container-links {
-  margin-top: max(1rem, 16px);
   display: grid;
-  gap: max(1rem, 16px);
 }
 .link-container-links li {
   flex-wrap: wrap;
@@ -338,6 +336,8 @@ li {
   background: var(--white);
   border-radius: max(8px, 0.5rem);
   padding: max(1rem, 16px);
+  overflow: hidden;
+  margin-top: max(1rem, 16px);
 }
 .link-container-links li h4,
 .link-container-links li a {
@@ -355,7 +355,10 @@ li {
 .link-container-links li .copy a:hover {
   color: #3a3054;
 }
-.link-container-links li .copy button {
+.link-container-links li .copy-right {
+  gap: max(1rem, 16px);
+}
+.link-container-links li .copy-right button.copy-btn {
   border-radius: max(4px, 0.25rem);
   font-weight: 700;
   height: max(40px, 2.5rem);
@@ -380,7 +383,10 @@ li {
     padding: 0 16px;
     width: 100%;
   }
-  .link-container-links li .copy button {
+  .link-container-links li .copy-right {
+    width: 100%;
+  }
+  .link-container-links li .copy-right button.copy-btn {
     width: 100%;
   }
 }
@@ -618,4 +624,21 @@ li {
 }
 .footer .attribution a:hover {
   color: var(--cyan);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0;
+  background: conic-gradient(rgba(0, 0, 0, 0) 10%, #ffffff);
+  -webkit-mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 9px), #000 0);
+  animation: spinner-zp9dbg 1s infinite linear;
+}
+
+@keyframes spinner-zp9dbg {
+  to {
+    transform: rotate(1turn);
+  }
 }/*# sourceMappingURL=app.css.map */

@@ -64,19 +64,38 @@ const createLink = (link, shortLink) => {
 	const linkTitle = document.createElement('h4')
 	const linkDivider = document.createElement('div')
 	const linkCopyDivEl = document.createElement('div')
+	const linkCopyRightDivEl = document.createElement('div')
 	const linkHrefEl = document.createElement('a')
 	const linkCopyBtn = document.createElement('button')
+	const linkDelBtn = document.createElement('button')
 
 	linkDivider.classList.add('line')
 	linkCopyDivEl.classList.add('copy')
+	linkCopyRightDivEl.classList.add('copy-right')
+	linkCopyBtn.classList.add('copy-btn')
+	linkDelBtn.classList.add('del-btn')
 
 	linkTitle.innerHTML = link
 	linkHrefEl.innerHTML = shortLink
 	linkHrefEl.href = shortLink
 	linkHrefEl.target = '_blank'
 	linkCopyBtn.innerHTML = 'Copy'
+	linkDelBtn.innerHTML = `	<svg
+	xmlns="http://www.w3.org/2000/svg"
+	width="32"
+	height="32"
+	viewBox="0 0 24 24"
+	fill="none">
+	<path
+		d="M21 5.98c-3.33-.33-6.68-.5-10.02-.5-1.98 0-3.96.1-5.94.3L3 5.98M8.5 4.97l.22-1.31C8.88 2.71 9 2 10.69 2h2.62c1.69 0 1.82.75 1.97 1.67l.22 1.3M18.85 9.14l-.65 10.07C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14M10.33 16.5h3.33M9.5 12.5h5"
+		stroke="#F46363"
+		stroke-width="1.5"
+		stroke-linecap="round"
+		stroke-linejoin="round"></path>
+</svg>`
 
-	linkCopyDivEl.append(...[linkHrefEl, linkCopyBtn])
+	linkCopyRightDivEl.append(...[linkCopyBtn, linkDelBtn])
+	linkCopyDivEl.append(...[linkHrefEl, linkCopyRightDivEl])
 
 	linkEl.append(...[linkTitle, linkDivider, linkCopyDivEl])
 
@@ -95,7 +114,27 @@ const createLink = (link, shortLink) => {
 		}, 1000)
 	}
 
+	const handleDeleteLink = () => {
+		const shortLinks = JSON.parse(localStorage.getItem('short-links'))
+
+		gsap.to(linkEl, {
+			maxHeight: 0,
+			padding: 0,
+			marginTop: 0,
+			ease: 'power4.out',
+			duration: 0.5,
+			onComplete: () => {
+				localStorage.setItem(
+					'short-links',
+					JSON.stringify(shortLinks.filter((link) => link.shortLink !== shortLink))
+				)
+				linkEl.remove()
+			},
+		})
+	}
+
 	linkCopyBtn.addEventListener('click', handleCopyLink)
+	linkDelBtn.addEventListener('click', handleDeleteLink)
 
 	if (linkInputVal.value) {
 		gsap.fromTo(
@@ -115,43 +154,80 @@ const createLink = (link, shortLink) => {
 }
 
 // API for shortening input link
-const fetchShortLink = async () => {
-	try {
-		// const response = await fetch('https://cleanuri.com/api/v1/shorten', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify({
-		// 		url: linkInputVal.value,
-		// 	}),
-		// })
-
-		// if(response.ok)
-
-		createLink(linkInputVal.value, 'https://rel.ink/k4lKyk')
-		addLinkToLocalStorage(linkInputVal.value, 'https://rel.ink/k4lKyk')
-	} catch (error) {
-		console.log(error)
-	}
-}
 
 const linkForm = document.querySelector('#link-form')
+const errorMsg = linkForm.querySelector('p')
+
+const fetchShortLink = async () => {
+	const span = document.querySelector('.link-container span')
+	const spinner = document.querySelector('.link-container .spinner')
+
+	try {
+		span.style.opacity = 0
+		spinner.style.opacity = 1
+
+		await fetch('https://tiny.cc/tiny/api/3/urls', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization:
+					'Basic ' + 'aXlrZWtlbHZpbnM6N2FlM2IwOGQtNDU1NC00OGEwLWEzZTEtZDU4NWEyMzVmMzcx',
+			},
+			body: JSON.stringify({
+				urls: [
+					{
+						long_url: linkInputVal.value,
+					},
+				],
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				const shortLink = data.urls[0].short_url_with_protocol
+				const err = data.urls[0].error.message
+
+				if (err !== '') {
+					linkInputVal.classList.add('error')
+					errorMsg.style.opacity = 1
+					errorMsg.innerHTML = err
+					linkForm.style.gap = '40px'
+				} else {
+					let newInputVal = !linkInputVal.value.includes('http')
+						? `https://${linkInputVal.value}`
+						: linkInputVal.value
+
+					createLink(newInputVal, shortLink)
+					addLinkToLocalStorage(newInputVal, shortLink)
+
+					linkInputVal.classList.remove('error')
+					errorMsg.style.opacity = 0
+					linkForm.style.gap = ''
+					linkInputVal.value = ''
+				}
+
+				span.style.opacity = 1
+				spinner.style.opacity = 0
+			})
+	} catch (error) {
+		console.log(error)
+
+		span.style.opacity = 1
+		spinner.style.opacity = 0
+	}
+}
 
 const handleLinkSubmit = (e) => {
 	e.preventDefault()
 
-	const errorMsg = linkForm.querySelector('p')
-
 	if (linkInputVal.value === '') {
 		linkInputVal.classList.add('error')
 		errorMsg.style.opacity = 1
+		errorMsg.innerHTML = 'Please add a link'
 		linkForm.style.gap = '40px'
 		return
 	}
 
 	fetchShortLink()
-	linkInputVal.value = ''
 	linkInputVal.classList.remove('error')
 	errorMsg.style.opacity = 0
 	linkForm.style.gap = ''
@@ -235,7 +311,7 @@ window.onload = () => {
 
 	if (shortLinks) {
 		shortLinks.forEach((_shortLink) => {
-			const { link, shortLink, id } = _shortLink
+			const { link, shortLink } = _shortLink
 
 			createLink(link, shortLink)
 		})
