@@ -27,8 +27,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here]([https://your-solution-url.com](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G/hub))
-- Live Site URL: [Add live site URL here](https://url-shortening-api-iykekelvins.vercel.app/)
+- Solution URL: []([https://your-solution-url.com](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G/hub))
+- Live Site URL: [](https://url-shortening-api-iykekelvins.vercel.app/)
 
 ### Built with
 
